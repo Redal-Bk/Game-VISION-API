@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="GameVISION.Application/GameVISION.Application.csproj" />
+  <Project Path="GameVISION.Core/GameVISION.Core.csproj" />
+  <Project Path="GameVISION.Infrastracture/GameVISION.Infrastracture.csproj" />
+  <Project Path="GameVISION/GameVISION.csproj" />
+</Solution>
