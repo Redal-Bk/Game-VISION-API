@@ -1,3 +1,7 @@
 <Solution>
+  <Project Path="Game-Vision.Application/Game-Vision.Application.csproj" />
+  <Project Path="Game-Vision.Common/Game-Vision.Common.csproj" />
+  <Project Path="Game-Vision.Domain/Game-Vision.Domain.csproj" />
+  <Project Path="Game-Vision.Infrastructure/Game-Vision.Infrastructure.csproj" />
   <Project Path="Game-Vision/Game-Vision.csproj" />
 </Solution>
