@@ -428,7 +428,70 @@ h1, h2, h3, h4, h5, h6 {
     padding: 3rem;
     box-shadow: 0 10px 40px rgba(0, 240, 255, 0.1);
 }
+/* اینپوت‌ها عرض کامل بگیرن و زیبا بشن */
+.form-control-custom {
+    width: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
 
+    .form-control-custom:focus {
+        outline: none;
+        border-color: var(--primary-neon);
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        background: var(--bg-hover);
+    }
+
+/* input-group رو درست کن تا اینپوت کامل عرض بگیره */
+.input-group .form-control-custom {
+    border-left: none; /* فقط سمت چپ بدون border (چون icon سمت راست هست) */
+    border-radius: 8px 0 0 8px; /* فقط گوشه چپ گرد باشه */
+    flex: 1;
+}
+
+.input-group .input-group-text {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-right: none;
+    border-radius: 0 8px 8px 0; /* فقط گوشه راست گرد باشه */
+    color: var(--primary-neon);
+}
+/* تگ‌های نئونی کوچیک‌تر و زیباتر */
+.badge-neon {
+    background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+    color: #000;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem; /* کوچیک‌تر شد */
+    border-radius: 6px; /* کمی کمتر گرد */
+    font-size: 0.75rem; /* فونت کوچیک‌تر */
+    display: inline-block;
+}
+
+    /* برای وقتی small استفاده کردی */
+    .badge-neon.small {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+/* تگ ژانرها هم کوچیک‌تر */
+.badge-genre {
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid var(--primary-neon);
+    color: var(--primary-neon);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    margin: 0.2rem 0.2rem 0.2rem 0; /* فاصله از سمت چپ */
+}
+
+    .badge-genre.small {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+    }
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2rem;

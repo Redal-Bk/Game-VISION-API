@@ -9,7 +9,9 @@ public partial class User
     public string Email { get; set; } = null!;
 
     public string PasswordHash { get; set; } = null!;
-
+    public string? DiscordId { get; set; } // Snowflake ID به string (مهم!)
+    public string? DiscordAvatarHash { get; set; } // فقط hash، نه URL کامل
+    public DateTime? DiscordLastSync { get; set; } // اختیاری: آخرین بار آپدیت از دیسکورد
     public int RoleId { get; set; }
 
     public string? ProfileImageUrl { get; set; }

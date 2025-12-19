@@ -1,0 +1,24 @@
+﻿@using System.Security.Claims
+@{
+    ViewData["Title"] = "پروفایل دیسکورد";
+}
+
+<h2>اطلاعات کاربر دیسکورد</h2>
+
+<ul>
+    @foreach (var claim in Model as List<string>)
+    {
+        <li><strong>@claim</strong></li>
+    }
+</ul>
+
+<p>User ID: @User.FindFirst(ClaimTypes.NameIdentifier)?.Value</p>
+<p>Username: @User.FindFirst(ClaimTypes.Name)?.Value</p>
+<p>Email: @User.FindFirst(ClaimTypes.Email)?.Value</p>
+<p>Avatar Hash: @User.FindFirst("urn:discord:avatar")?.Value</p>
+
+@if (User.FindFirst("urn:discord:avatar")?.Value is string avatarHash)
+{
+    <p>@avatarHash</p>
+   
+}

@@ -12,14 +12,34 @@
     <link rel="stylesheet" href="~/css/Style/styles.css">
 </head>
 <body>
-   
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-lg-4">
                 <div class="system-specs text-center">
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Avatar" class="profile-avatar mb-3">
-                    <h3 class="mb-2">علی محمدی</h3>
-                    <p class="text-secondary mb-3">ali_gamer</p>
+                    @{
+                        var discordId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                        var avatarHash = User.FindFirst("urn:discord:avatar")?.Value;
+                        var username = User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value ?? "کاربر دیسکورد";
+                        var globalName = User.FindFirst("urn:discord:global_name")?.Value;
+                        var displayName = !string.IsNullOrEmpty(globalName) ? globalName : username;
+
+                        string avatarUrl;
+                        if (!string.IsNullOrEmpty(discordId) && !string.IsNullOrEmpty(avatarHash))
+                        {
+                            avatarUrl = $"https://cdn.discordapp.com/avatars/{discordId}/{avatarHash}.png?size=512";
+                        }
+                        else
+                        {
+                            avatarUrl = "https://cdn.discordapp.com/embed/avatars/0.png";
+                        }
+                    }
+
+                    <img src="@avatarUrl" alt="Avatar" class="profile-avatar mb-3"
+                         onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
+
+                    <h3 class="mb-2">@displayName</h3>
+                    <p class="text-secondary mb-3">@username</p>
 
                     <div class="d-flex justify-content-center gap-3 mb-4">
                         <div class="text-center">
@@ -35,11 +55,9 @@
                             <small class="text-secondary">امتیاز</small>
                         </div>
                     </div>
-
                     <p class="text-secondary mb-4" style="line-height: 1.8;">
                         یک گیمر حرفه‌ای با علاقه به بازی‌های RPG و اکشن-ماجراجویی. عاشق داستان‌های قوی و گیم‌پلی چالشی.
                     </p>
-
                     <button class="btn btn-outline-neon w-100 mb-2">
                         <i class="bi bi-pencil"></i> ویرایش پروفایل
                     </button>
@@ -47,7 +65,6 @@
                         <i class="bi bi-gear"></i> تنظیمات
                     </button>
                 </div>
-
                 <div class="system-specs mt-4">
                     <h5 class="mb-3">مشخصات سیستم من</h5>
                     <div class="spec-item">
@@ -78,7 +95,6 @@
                         <i class="bi bi-pencil"></i> ویرایش مشخصات
                     </button>
                 </div>
-
                 <div class="system-specs mt-4">
                     <h5 class="mb-3">دستاوردها</h5>
                     <div class="d-flex flex-wrap gap-2">
@@ -97,7 +113,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-8">
                 <ul class="nav nav-tabs mb-4" style="border-bottom: 2px solid var(--border-color);">
                     <li class="nav-item">
@@ -116,14 +131,14 @@
                         </a>
                     </li>
                 </ul>
-
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="favorites">
                         <h4 class="mb-4">بازی‌های مورد علاقه من</h4>
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <!-- کاور رسمی Cyberpunk 2077 -->
+                                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/eef327f5-d629-4be7-81dd-a38d262d16c6.jpg" alt="Cyberpunk 2077">
                                     <div class="card-game-body">
                                         <h5 class="card-game-title">Cyberpunk 2077</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -147,10 +162,10 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <img src="https://images.pexels.com/photos/7915434/pexels-photo-7915434.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <!-- کاور رسمی God of War Ragnarök -->
+                                    <img src="https://preview.redd.it/v72pm7rmbnm71.jpg?auto=webp&s=030d8d1dfe4a568d24ba6c6d2cab78654206b0ae" alt="God of War Ragnarök">
                                     <div class="card-game-body">
                                         <h5 class="card-game-title">God of War Ragnarök</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -174,10 +189,10 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <img src="https://images.pexels.com/photos/9071739/pexels-photo-9071739.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <!-- کاور رسمی Hogwarts Legacy -->
+                                    <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/store/software/switch/70010000014724/72ce0a17215521a167c3da579db4cc48a2f7a52eacc81ad985ba20fd6817fdc2" alt="Hogwarts Legacy">
                                     <div class="card-game-body">
                                         <h5 class="card-game-title">Hogwarts Legacy</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -201,10 +216,10 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <img src="https://images.pexels.com/photos/7915437/pexels-photo-7915437.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <!-- کاور رسمی The Last of Us Part II -->
+                                    <img src="https://s3.us-east-1.amazonaws.com/nd.images/uploads/Key-Art-Images-Dark-for-Feb-11-Blog_200304_205559.jpg" alt="The Last of Us Part II">
                                     <div class="card-game-body">
                                         <h5 class="card-game-title">The Last of Us Part II</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -230,10 +245,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="tab-pane fade" id="reviews">
                         <h4 class="mb-4">بررسی‌های من</h4>
-
                         <div class="review-card">
                             <div class="d-flex justify-content-between align-items-start mb-3">
                                 <div>
@@ -261,7 +274,6 @@
                                 </button>
                             </div>
                         </div>
-
                         <div class="review-card">
                             <div class="d-flex justify-content-between align-items-start mb-3">
                                 <div>
@@ -289,7 +301,6 @@
                                 </button>
                             </div>
                         </div>
-
                         <div class="review-card">
                             <div class="d-flex justify-content-between align-items-start mb-3">
                                 <div>
@@ -318,10 +329,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="tab-pane fade" id="activity">
                         <h4 class="mb-4">آخرین فعالیت‌ها</h4>
-
                         <div class="review-card">
                             <div class="d-flex gap-3">
                                 <div style="color: var(--primary-neon);">
@@ -335,7 +344,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="review-card">
                             <div class="d-flex gap-3">
                                 <div style="color: var(--accent-green);">
@@ -349,7 +357,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="review-card">
                             <div class="d-flex gap-3">
                                 <div style="color: var(--secondary-neon);">
@@ -363,7 +370,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="review-card">
                             <div class="d-flex gap-3">
                                 <div style="color: var(--primary-neon);">
@@ -377,7 +383,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="review-card">
                             <div class="d-flex gap-3">
                                 <div style="color: var(--accent-green);">
@@ -396,8 +401,6 @@
             </div>
         </div>
     </div>
-
-   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
