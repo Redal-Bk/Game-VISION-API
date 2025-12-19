@@ -1,0 +1,404 @@
+﻿@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVision - پروفایل کاربر</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/Style/styles.css">
+</head>
+<body>
+   
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="system-specs text-center">
+                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Avatar" class="profile-avatar mb-3">
+                    <h3 class="mb-2">علی محمدی</h3>
+                    <p class="text-secondary mb-3">ali_gamer</p>
+
+                    <div class="d-flex justify-content-center gap-3 mb-4">
+                        <div class="text-center">
+                            <h5 class="mb-0">127</h5>
+                            <small class="text-secondary">بازی‌ها</small>
+                        </div>
+                        <div class="text-center" style="border-right: 1px solid var(--border-color); border-left: 1px solid var(--border-color); padding: 0 1rem;">
+                            <h5 class="mb-0">45</h5>
+                            <small class="text-secondary">بررسی</small>
+                        </div>
+                        <div class="text-center">
+                            <h5 class="mb-0">892</h5>
+                            <small class="text-secondary">امتیاز</small>
+                        </div>
+                    </div>
+
+                    <p class="text-secondary mb-4" style="line-height: 1.8;">
+                        یک گیمر حرفه‌ای با علاقه به بازی‌های RPG و اکشن-ماجراجویی. عاشق داستان‌های قوی و گیم‌پلی چالشی.
+                    </p>
+
+                    <button class="btn btn-outline-neon w-100 mb-2">
+                        <i class="bi bi-pencil"></i> ویرایش پروفایل
+                    </button>
+                    <button class="btn btn-outline-neon w-100">
+                        <i class="bi bi-gear"></i> تنظیمات
+                    </button>
+                </div>
+
+                <div class="system-specs mt-4">
+                    <h5 class="mb-3">مشخصات سیستم من</h5>
+                    <div class="spec-item">
+                        <div class="d-flex justify-content-between">
+                            <span class="text-secondary">پردازنده:</span>
+                            <span>Intel Core i7-12700K</span>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="d-flex justify-content-between">
+                            <span class="text-secondary">کارت گرافیک:</span>
+                            <span>RTX 3080</span>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="d-flex justify-content-between">
+                            <span class="text-secondary">رم:</span>
+                            <span>32 GB DDR4</span>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="d-flex justify-content-between">
+                            <span class="text-secondary">حافظه:</span>
+                            <span>1TB SSD</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-neon btn-sm w-100 mt-3">
+                        <i class="bi bi-pencil"></i> ویرایش مشخصات
+                    </button>
+                </div>
+
+                <div class="system-specs mt-4">
+                    <h5 class="mb-3">دستاوردها</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge-genre" title="100 بازی تکمیل شده">
+                            <i class="bi bi-trophy"></i> قهرمان
+                        </span>
+                        <span class="badge-genre" title="50 بررسی نوشته شده">
+                            <i class="bi bi-star"></i> منتقد
+                        </span>
+                        <span class="badge-genre" title="عضو 1 ساله">
+                            <i class="bi bi-calendar"></i> وفادار
+                        </span>
+                        <span class="badge-genre" title="100 نظر مفید">
+                            <i class="bi bi-heart"></i> محبوب
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <ul class="nav nav-tabs mb-4" style="border-bottom: 2px solid var(--border-color);">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#favorites" style="color: var(--primary-neon); border-color: var(--primary-neon);">
+                            <i class="bi bi-heart-fill"></i> علاقه‌مندی‌ها
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#reviews" style="color: var(--text-secondary);">
+                            <i class="bi bi-star"></i> بررسی‌ها
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#activity" style="color: var(--text-secondary);">
+                            <i class="bi bi-clock-history"></i> فعالیت‌ها
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="favorites">
+                        <h4 class="mb-4">بازی‌های مورد علاقه من</h4>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card-game">
+                                    <img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <div class="card-game-body">
+                                        <h5 class="card-game-title">Cyberpunk 2077</h5>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="rating-stars">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-half"></i>
+                                                <span class="small">4.5</span>
+                                            </div>
+                                            <button class="btn btn-sm" style="color: var(--accent-red);">
+                                                <i class="bi bi-heart-fill"></i>
+                                            </button>
+                                        </div>
+                                        <div class="d-flex gap-1 mb-3">
+                                            <span class="badge-genre small">اکشن</span>
+                                            <span class="badge-genre small">RPG</span>
+                                        </div>
+                                        <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card-game">
+                                    <img src="https://images.pexels.com/photos/7915434/pexels-photo-7915434.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <div class="card-game-body">
+                                        <h5 class="card-game-title">God of War Ragnarök</h5>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="rating-stars">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <span class="small">5.0</span>
+                                            </div>
+                                            <button class="btn btn-sm" style="color: var(--accent-red);">
+                                                <i class="bi bi-heart-fill"></i>
+                                            </button>
+                                        </div>
+                                        <div class="d-flex gap-1 mb-3">
+                                            <span class="badge-genre small">اکشن</span>
+                                            <span class="badge-genre small">ماجراجویی</span>
+                                        </div>
+                                        <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card-game">
+                                    <img src="https://images.pexels.com/photos/9071739/pexels-photo-9071739.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <div class="card-game-body">
+                                        <h5 class="card-game-title">Hogwarts Legacy</h5>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="rating-stars">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                                <span class="small">4.0</span>
+                                            </div>
+                                            <button class="btn btn-sm" style="color: var(--accent-red);">
+                                                <i class="bi bi-heart-fill"></i>
+                                            </button>
+                                        </div>
+                                        <div class="d-flex gap-1 mb-3">
+                                            <span class="badge-genre small">RPG</span>
+                                            <span class="badge-genre small">Open World</span>
+                                        </div>
+                                        <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card-game">
+                                    <img src="https://images.pexels.com/photos/7915437/pexels-photo-7915437.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <div class="card-game-body">
+                                        <h5 class="card-game-title">The Last of Us Part II</h5>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="rating-stars">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-half"></i>
+                                                <span class="small">4.7</span>
+                                            </div>
+                                            <button class="btn btn-sm" style="color: var(--accent-red);">
+                                                <i class="bi bi-heart-fill"></i>
+                                            </button>
+                                        </div>
+                                        <div class="d-flex gap-1 mb-3">
+                                            <span class="badge-genre small">اکشن</span>
+                                            <span class="badge-genre small">ماجراجویی</span>
+                                        </div>
+                                        <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="reviews">
+                        <h4 class="mb-4">بررسی‌های من</h4>
+
+                        <div class="review-card">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h5 class="mb-2">Cyberpunk 2077</h5>
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                    </div>
+                                </div>
+                                <span class="text-secondary small">2 روز پیش</span>
+                            </div>
+                            <p class="text-secondary mb-3">
+                                یکی از بهترین بازی‌هایی که تا به حال تجربه کردم. داستان عالی، گرافیک بی‌نظیر
+                                و گیم‌پلی متنوع. بعد از بروزرسانی‌های اخیر، بازی به شکل فوق‌العاده‌ای بهینه شده.
+                            </p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-neon btn-sm">
+                                    <i class="bi bi-pencil"></i> ویرایش
+                                </button>
+                                <button class="btn btn-outline-neon btn-sm">
+                                    <i class="bi bi-trash"></i> حذف
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h5 class="mb-2">God of War Ragnarök</h5>
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                </div>
+                                <span class="text-secondary small">1 هفته پیش</span>
+                            </div>
+                            <p class="text-secondary mb-3">
+                                شاهکار واقعی! داستان بی‌نظیر، گرافیک خیره‌کننده و گیم‌پلی کامل. رابطه کریتوس
+                                و آترئوس خیلی عمیق و احساسی شده. یکی از بهترین بازی‌های نسل جدید.
+                            </p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-neon btn-sm">
+                                    <i class="bi bi-pencil"></i> ویرایش
+                                </button>
+                                <button class="btn btn-outline-neon btn-sm">
+                                    <i class="bi bi-trash"></i> حذف
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h5 class="mb-2">Hogwarts Legacy</h5>
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                    </div>
+                                </div>
+                                <span class="text-secondary small">2 هفته پیش</span>
+                            </div>
+                            <p class="text-secondary mb-3">
+                                برای طرفداران هری پاتر عالیه! دنیای جادوگری به خوبی ساخته شده و کاوش در
+                                هاگوارتز فوق‌العاده است. فقط داستان اصلی می‌تونست قوی‌تر باشه.
+                            </p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-neon btn-sm">
+                                    <i class="bi bi-pencil"></i> ویرایش
+                                </button>
+                                <button class="btn btn-outline-neon btn-sm">
+                                    <i class="bi bi-trash"></i> حذف
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="activity">
+                        <h4 class="mb-4">آخرین فعالیت‌ها</h4>
+
+                        <div class="review-card">
+                            <div class="d-flex gap-3">
+                                <div style="color: var(--primary-neon);">
+                                    <i class="bi bi-heart-fill fs-4"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1">
+                                        <strong>Cyberpunk 2077</strong> را به علاقه‌مندی‌ها اضافه کردید
+                                    </p>
+                                    <small class="text-secondary">2 روز پیش</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="d-flex gap-3">
+                                <div style="color: var(--accent-green);">
+                                    <i class="bi bi-star-fill fs-4"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1">
+                                        بررسی جدیدی برای <strong>God of War Ragnarök</strong> نوشتید
+                                    </p>
+                                    <small class="text-secondary">1 هفته پیش</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="d-flex gap-3">
+                                <div style="color: var(--secondary-neon);">
+                                    <i class="bi bi-chat-fill fs-4"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1">
+                                        نظری در خبر <strong>عنوان جدید God of War</strong> گذاشتید
+                                    </p>
+                                    <small class="text-secondary">1 هفته پیش</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="d-flex gap-3">
+                                <div style="color: var(--primary-neon);">
+                                    <i class="bi bi-heart-fill fs-4"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1">
+                                        <strong>Hogwarts Legacy</strong> را به علاقه‌مندی‌ها اضافه کردید
+                                    </p>
+                                    <small class="text-secondary">2 هفته پیش</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="d-flex gap-3">
+                                <div style="color: var(--accent-green);">
+                                    <i class="bi bi-star-fill fs-4"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1">
+                                        بررسی جدیدی برای <strong>Hogwarts Legacy</strong> نوشتید
+                                    </p>
+                                    <small class="text-secondary">2 هفته پیش</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -5,6 +5,7 @@ namespace Game_Vision.Domain
     // 1. GameGenre (واسط بازی و ژانر)
     public class GameGenre
     {
+     
         public int GameId { get; set; }
         public int GenreId { get; set; }
 

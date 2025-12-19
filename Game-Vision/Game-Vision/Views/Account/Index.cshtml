@@ -1,0 +1,190 @@
+﻿@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVision - ورود / ثبت‌نام</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/Style/styles.css">
+</head>
+<body>
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="login-card">
+                    <div class="text-center mb-4">
+                        <h2 class="mb-2">
+                            <i class="bi bi-controller" style="color: var(--primary-neon);"></i>
+                            <span style="background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                GameVision
+                            </span>
+                        </h2>
+                        <p class="text-secondary">به بزرگترین جامعه گیمینگ ایران بپیوندید</p>
+                    </div>
+
+                    <ul class="nav nav-pills mb-4 justify-content-center" style="background: var(--bg-dark); padding: 0.5rem; border-radius: 8px;">
+                        <li class="nav-item" style="flex: 1;">
+                            <a class="nav-link active text-center" id="login-tab" data-bs-toggle="pill" href="#login" style="background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon)); color: #000; font-weight: 600;">
+                                ورود
+                            </a>
+                        </li>
+                        <li class="nav-item" style="flex: 1;">
+                            <a class="nav-link text-center" id="register-tab" data-bs-toggle="pill" href="#register" style="color: var(--text-secondary); font-weight: 600;">
+                                ثبت‌نام
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="login">
+                            <form id="login">
+                                @Html.AntiForgeryToken()
+                                <div class="mb-3">
+                                    <label class="form-label">ایمیل یا نام کاربری</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" style="background: var(--bg-dark); border: 1px solid var(--border-color); color: var(--primary-neon);">
+                                            <i class="bi bi-person"></i>
+                                        </span>
+                                        <input type="text" class="form-control-custom" placeholder="your@email.com" style="border-right: none;">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">رمز عبور</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" style="background: var(--bg-dark); border: 1px solid var(--border-color); color: var(--primary-neon);">
+                                            <i class="bi bi-lock"></i>
+                                        </span>
+                                        <input type="password" class="form-control-custom" placeholder="********" style="border-right: none;">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="remember" style="border-color: var(--border-color);">
+                                        <label class="form-check-label text-secondary" for="remember">
+                                            مرا به خاطر بسپار
+                                        </label>
+                                    </div>
+                                    <a href="#" class="footer-link small">فراموشی رمز عبور؟</a>
+                                </div>
+
+                                <button type="submit" class="btn btn-neon w-100 mb-3">
+                                    <i class="bi bi-box-arrow-in-left"></i> ورود
+                                </button>
+
+                                <div class="text-center mb-3">
+                                    <span class="text-secondary">یا ورود با</span>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button type="button" class="btn btn-outline-neon w-100">
+                                        <i class="bi bi-google"></i> Google
+                                    </button>
+                                    <button type="button" class="btn btn-outline-neon w-100">
+                                        <i class="bi bi-discord"></i> Discord
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade" id="register">
+                            <form id="register">
+                                @Html.AntiForgeryToken()
+                              
+                                <div class="mb-3">
+                                    <label class="form-label">نام کاربری</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" style="background: var(--bg-dark); border: 1px solid var(--border-color); color: var(--primary-neon);">
+                                            <i class="bi bi-at"></i>
+                                        </span>
+                                        <input type="text" class="form-control-custom" placeholder="ali_gamer" style="border-right: none;">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">ایمیل</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" style="background: var(--bg-dark); border: 1px solid var(--border-color); color: var(--primary-neon);">
+                                            <i class="bi bi-envelope"></i>
+                                        </span>
+                                        <input type="email" class="form-control-custom" placeholder="your@email.com" style="border-right: none;">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">رمز عبور</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" style="background: var(--bg-dark); border: 1px solid var(--border-color); color: var(--primary-neon);">
+                                            <i class="bi bi-lock"></i>
+                                        </span>
+                                        <input type="password" class="form-control-custom" placeholder="********" style="border-right: none;">
+                                    </div>
+                                </div>
+
+                                
+
+                                <div class="form-check mb-4">
+                                    <input class="form-check-input" type="checkbox" id="terms" style="border-color: var(--border-color);">
+                                    <label class="form-check-label text-secondary" for="terms">
+                                        <a href="#" class="footer-link">قوانین و مقررات</a> را خوانده و می‌پذیرم
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-neon w-100 mb-3">
+                                    <i class="bi bi-person-plus"></i> ثبت‌نام
+                                </button>
+
+                                <div class="text-center mb-3">
+                                    <span class="text-secondary">یا ثبت‌نام با</span>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button type="button" class="btn btn-outline-neon w-100">
+                                        <i class="bi bi-google"></i> Google
+                                    </button>
+                                    <button type="button" class="btn btn-outline-neon w-100">
+                                        <i class="bi bi-discord"></i> Discord
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p class="text-secondary">
+                        با عضویت در GameVision، به هزاران بازی، بررسی و خبر دسترسی خواهید داشت
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.nav-link[data-bs-toggle="pill"]').forEach(tab => {
+            tab.addEventListener('shown.bs.tab', function (e) {
+                if (e.target.getAttribute('href') === '#login') {
+                    document.getElementById('login-tab').style.background = 'linear-gradient(135deg, var(--primary-neon), var(--secondary-neon))';
+                    document.getElementById('login-tab').style.color = '#000';
+                    document.getElementById('register-tab').style.background = 'transparent';
+                    document.getElementById('register-tab').style.color = 'var(--text-secondary)';
+                } else {
+                    document.getElementById('register-tab').style.background = 'linear-gradient(135deg, var(--primary-neon), var(--secondary-neon))';
+                    document.getElementById('register-tab').style.color = '#000';
+                    document.getElementById('login-tab').style.background = 'transparent';
+                    document.getElementById('login-tab').style.color = 'var(--text-secondary)';
+                }
+            });
+        });
+    </script>
+    <script src="~/js/Views/Account/auth.js"></script>
+</body>
+</html>

@@ -1,50 +1,68 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Game_Vision</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Game_Vision.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Game_Vision</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+﻿<link href="~/321654987846985749674967.ico" rel="icon" type="image/x-icon" />
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <i class="bi bi-controller"></i> GameVision
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">خانه</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="games.html">بازی‌ها</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="news.html">اخبار</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="profile.html">پروفایل</a>
+                </li>
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                <input type="search" class="search-box" placeholder="جستجوی بازی...">
+                @* <button class="theme-toggle">
+                    <i class="bi bi-moon-stars"></i>
+                </button> *@
+                <a href="login.html" class="btn btn-neon">ورود / ثبت‌نام</a>
+            </div>
+        </div>
+    </div>
+</nav>
+@RenderBody()
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-3">
+                    <i class="bi bi-controller"></i> GameVision
+                </h5>
+                <p class="text-secondary">بزرگترین پلتفرم گیمینگ فارسی با اخبار، بررسی‌ها و اطلاعات کامل بازی‌ها</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h6 class="mb-3">لینک‌های سریع</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="index.html" class="footer-link">خانه</a></li>
+                    <li class="mb-2"><a href="games.html" class="footer-link">بازی‌ها</a></li>
+                    <li class="mb-2"><a href="news.html" class="footer-link">اخبار</a></li>
+                    <li class="mb-2"><a href="profile.html" class="footer-link">پروفایل</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h6 class="mb-3">شبکه‌های اجتماعی</h6>
+                <div class="d-flex gap-3">
+                    <a href="https://instagram.com/Gamevision" class="footer-link fs-4"><i class="bi bi-instagram"></i></a>
+                    <a href="https://t.me/Gamevision" class="footer-link fs-4"><i class="bi bi-telegram"></i></a>
+                    <a href="https://google.com" class="footer-link fs-4"><i class="bi bi-discord"></i></a>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Game_Vision - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+        <hr style="border-color: var(--border-color);">
+        <div class="text-center text-secondary">
+            <p>&copy; 2026 GameVision. تمامی حقوق محفوظ است.</p>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,424 @@
+﻿@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVision - بازی‌ها</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/Style/styles.css">
+</head>
+<body>
+   
+    <div class="container mt-5">
+        <div class="mb-5">
+            <h1 class="section-title">همه بازی‌ها</h1>
+            <p class="text-secondary">کامل‌ترین مرجع اطلاعات بازی‌های ویدیویی</p>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-4 mb-3">
+                <div class="system-specs">
+                    <h5 class="mb-3">فیلترها</h5>
+
+                    <div class="mb-4">
+                        <h6 class="mb-3">ژانر</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="action" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="action">اکشن</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="rpg" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="rpg">RPG</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="adventure" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="adventure">ماجراجویی</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="strategy" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="strategy">استراتژی</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="sports" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="sports">ورزشی</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="mb-3">پلتفرم</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="pc" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="pc">PC</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="ps5" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="ps5">PlayStation 5</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="xbox" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="xbox">Xbox Series X/S</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="switch" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="switch">Nintendo Switch</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="mb-3">امتیاز</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="rating5" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="rating5">
+                                <span class="rating-stars small">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="rating4" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="rating4">
+                                <span class="rating-stars small">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </span>
+                                و بالاتر
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="rating3" style="border-color: var(--border-color);">
+                            <label class="form-check-label text-secondary" for="rating3">
+                                <span class="rating-stars small">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </span>
+                                و بالاتر
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline-neon w-100 mb-2">اعمال فیلتر</button>
+                    <button class="btn btn-outline-neon w-100">پاک کردن فیلتر</button>
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-8">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <p class="text-secondary mb-0">نمایش 1-12 از 256 بازی</p>
+                    <select class="search-box" style="width: auto; padding: 0.5rem 1rem;">
+                        <option>جدیدترین</option>
+                        <option>محبوب‌ترین</option>
+                        <option>بالاترین امتیاز</option>
+                        <option>نام (الف-ی)</option>
+                    </select>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">Cyberpunk 2077</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                        <span class="small">4.5</span>
+                                    </div>
+                                    <span class="badge-neon">PC</span>
+                                </div>
+                                <p class="text-secondary small mb-3">در دنیای آینده نقش یک مزدور را بازی کنید...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/7915434/pexels-photo-7915434.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">God of War Ragnarök</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                        <span class="small">4.7</span>
+                                    </div>
+                                    <span class="badge-neon">PS5</span>
+                                </div>
+                                <p class="text-secondary small mb-3">کریتوس و آترئوس در ماجراجویی جدید...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/9071739/pexels-photo-9071739.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">Hogwarts Legacy</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <span class="small">5.0</span>
+                                    </div>
+                                    <span class="badge-neon">Multi</span>
+                                </div>
+                                <p class="text-secondary small mb-3">وارد دنیای جادوگری هری پاتر شوید...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/7915437/pexels-photo-7915437.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">The Last of Us Part III</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                        <span class="small">4.0</span>
+                                    </div>
+                                    <span class="badge-neon">PS5</span>
+                                </div>
+                                <p class="text-secondary small mb-3">یک بازی اکشن-ماجراجویی پس از آخرالزمانی...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">Elden Ring</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                        <span class="small">4.8</span>
+                                    </div>
+                                    <span class="badge-neon">PC</span>
+                                </div>
+                                <p class="text-secondary small mb-3">یک RPG اکشن با دنیای باز و چالشی...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/7915434/pexels-photo-7915434.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">Spider-Man 2</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                        <span class="small">4.6</span>
+                                    </div>
+                                    <span class="badge-neon">PS5</span>
+                                </div>
+                                <p class="text-secondary small mb-3">پیتر و مایلز در ماموریتی جدید...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/9071739/pexels-photo-9071739.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">Starfield</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                        <span class="small">4.2</span>
+                                    </div>
+                                    <span class="badge-neon">Xbox</span>
+                                </div>
+                                <p class="text-secondary small mb-3">یک RPG فضایی گسترده از بتزدا...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/7915437/pexels-photo-7915437.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">Baldur's Gate 3</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <span class="small">5.0</span>
+                                    </div>
+                                    <span class="badge-neon">PC</span>
+                                </div>
+                                <p class="text-secondary small mb-3">یک RPG فانتزی با انتخاب‌های متنوع...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">Alan Wake 2</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                        <span class="small">4.4</span>
+                                    </div>
+                                    <span class="badge-neon">Multi</span>
+                                </div>
+                                <p class="text-secondary small mb-3">یک بازی ترسناک با داستانی جذاب...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/7915434/pexels-photo-7915434.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">Resident Evil 4 Remake</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                        <span class="small">4.7</span>
+                                    </div>
+                                    <span class="badge-neon">PS5</span>
+                                </div>
+                                <p class="text-secondary small mb-3">بازسازی کلاسیک با گرافیک مدرن...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/9071739/pexels-photo-9071739.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">Street Fighter 6</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                        <span class="small">4.3</span>
+                                    </div>
+                                    <span class="badge-neon">Multi</span>
+                                </div>
+                                <p class="text-secondary small mb-3">جدیدترین نسخه از سری معروف مبارزه‌ای...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card-game">
+                            <img src="https://images.pexels.com/photos/7915437/pexels-photo-7915437.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                            <div class="card-game-body">
+                                <h5 class="card-game-title">Diablo IV</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="rating-stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                        <span class="small">4.1</span>
+                                    </div>
+                                    <span class="badge-neon">PC</span>
+                                </div>
+                                <p class="text-secondary small mb-3">بازگشت سری افسانه‌ای Action RPG...</p>
+                                <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-5">
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" style="background: var(--bg-card); border-color: var(--border-color); color: var(--text-secondary);">قبلی</a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#" style="background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon)); border: none; color: #000;">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" style="background: var(--bg-card); border-color: var(--border-color); color: var(--text-primary);">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" style="background: var(--bg-card); border-color: var(--border-color); color: var(--text-primary);">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" style="background: var(--bg-card); border-color: var(--border-color); color: var(--text-primary);">4</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" style="background: var(--bg-card); border-color: var(--border-color); color: var(--text-primary);">بعدی</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

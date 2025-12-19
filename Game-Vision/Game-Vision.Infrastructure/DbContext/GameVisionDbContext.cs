@@ -20,9 +20,9 @@ public partial class GameVisionDbContext : DbContext
     public virtual DbSet<Developer> Developers { get; set; }
 
     public virtual DbSet<Favorite> Favorites { get; set; }
-    public virtual DbSet<GameGenre> GameGenres { get; set; }
-    public virtual DbSet<GamePlatform> GamePlatforms { get; set; }
-    public virtual DbSet<GameTag> GameTags { get; set; }
+    //public virtual DbSet<GameGenre> GameGenres { get; set; }
+    //public virtual DbSet<GamePlatform> GamePlatforms { get; set; }
+   // public virtual DbSet<GameTag> GameTags { get; set; }
 
     public virtual DbSet<Game> Games { get; set; }
 
@@ -91,7 +91,18 @@ public partial class GameVisionDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Comments_UserId_Users");
         });
+        modelBuilder.Entity<Log>(entity =>
+        {
+            entity.HasIndex(e => e.Level);
+            entity.HasIndex(e => e.TimeStamp).IsDescending();
+            entity.HasIndex(e => new { e.TimeStamp, e.Level }).IsDescending();
 
+            entity.HasIndex(e => e.UserId);
+            entity.HasIndex(e => e.ClientIP);
+            entity.HasIndex(e => e.RequestPath);
+            entity.HasIndex(e => e.StatusCode);
+            entity.HasIndex(e => e.ElapsedMs).IsDescending();
+        });
         modelBuilder.Entity<Developer>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Develope__3214EC07ABE29868");
@@ -108,7 +119,23 @@ public partial class GameVisionDbContext : DbContext
             entity.Property(e => e.Slug).HasMaxLength(150);
             entity.Property(e => e.WebsiteUrl).HasMaxLength(500);
         });
+        modelBuilder.Entity<GameGenre>(entity =>
+        {
+            entity.HasKey(gg => new { gg.GameId, gg.GenreId });  // این خط کافیه!
+                                                                 // بقیه تنظیمات...
+        });
 
+        modelBuilder.Entity<GamePlatform>(entity =>
+        {
+            entity.HasKey(gp => new { gp.GameId, gp.PlatformId });
+            // ...
+        });
+
+        modelBuilder.Entity<GameTag>(entity =>
+        {
+            entity.HasKey(gt => new { gt.GameId, gt.TagId });
+            // ...
+        });
         modelBuilder.Entity<Favorite>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Favorite__3214EC076B856721");
@@ -524,65 +551,7 @@ public partial class GameVisionDbContext : DbContext
                 .HasForeignKey<UserPcspec>(d => d.UserId)
                 .HasConstraintName("FK_UserPCSpecs_UserId_Users");
         });
-        // ====================== GameGenre ======================
-        modelBuilder.Entity<GameGenre>(entity =>
-        {
-            entity.HasKey(gg => new { gg.GameId, gg.GenreId });
-
-            entity.HasIndex(gg => gg.GenreId);
-
-            entity.HasOne(gg => gg.Game)
-                  .WithMany(g => g.GameGenres)
-                  .HasForeignKey(gg => gg.GameId)
-                  .OnDelete(DeleteBehavior.Cascade);
-
-            entity.HasOne(gg => gg.Genre)
-                  .WithMany(g => g.GameGenres)
-                  .HasForeignKey(gg => gg.GenreId)
-                  .OnDelete(DeleteBehavior.Cascade);
-
-            entity.ToTable("GameGenres");
-        });
-
-        // ====================== GamePlatform ======================
-        modelBuilder.Entity<GamePlatform>(entity =>
-        {
-            entity.HasKey(gp => new { gp.GameId, gp.PlatformId });
-
-            entity.HasIndex(gp => gp.PlatformId);
-
-            entity.HasOne(gp => gp.Game)
-                  .WithMany(g => g.GamePlatforms)
-                  .HasForeignKey(gp => gp.GameId)
-                  .OnDelete(DeleteBehavior.Cascade);
-
-            entity.HasOne(gp => gp.Platform)
-                  .WithMany(p => p.GamePlatforms)
-                  .HasForeignKey(gp => gp.PlatformId)
-                  .OnDelete(DeleteBehavior.Cascade);
-
-            entity.ToTable("GamePlatforms");
-        });
-
-        // ====================== GameTag ======================
-        modelBuilder.Entity<GameTag>(entity =>
-        {
-            entity.HasKey(gt => new { gt.GameId, gt.TagId });
-
-            entity.HasIndex(gt => gt.TagId);
-
-            entity.HasOne(gt => gt.Game)
-                  .WithMany(g => g.GameTags)
-                  .HasForeignKey(gt => gt.GameId)
-                  .OnDelete(DeleteBehavior.Cascade);
-
-            entity.HasOne(gt => gt.Tag)
-                  .WithMany(t => t.GameTags)
-                  .HasForeignKey(gt => gt.TagId)
-                  .OnDelete(DeleteBehavior.Cascade);
-
-            entity.ToTable("GameTags");
-        });
+        
 
         OnModelCreatingPartial(modelBuilder);
     }

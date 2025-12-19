@@ -1,4 +1,8 @@
-﻿using Game_Vision.Models; 
+﻿using FluentValidation;
+using Game_Vision.Application.Command.Auth;
+using Game_Vision.Application.Interface;
+using Game_Vision.Application.Validator;
+using Game_Vision.Models; 
 using Microsoft.EntityFrameworkCore;
 
 namespace Game_Vision.AppExtention 
@@ -20,12 +24,10 @@ namespace Game_Vision.AppExtention
                             errorNumbersToAdd: null);
                     }));
 
-            // اینجا می‌تونی بقیه سرویس‌ها رو اضافه کنی، مثلاً:
-            //services.AddAutoMapper(typeof(MappingProfile));
-            //services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SomeHandler).Assembly));
-            //services.AddScoped<IGameRepository, GameRepository>();
-            //services.AddAuthentication(...)
-
+            // inject services 
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RegisterCommand).Assembly));
+            services.AddValidatorsFromAssembly(typeof(RegisterCommandValidator).Assembly);
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             return services;
         }
     }
