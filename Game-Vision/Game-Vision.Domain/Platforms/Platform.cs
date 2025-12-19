@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 
-namespace Game_Vision.Models;
+namespace Game_Vision.Domain;
 
 public partial class Platform
 {
@@ -16,4 +15,5 @@ public partial class Platform
     public DateTime CreatedAt { get; set; }
 
     public virtual ICollection<Game> Games { get; set; } = new List<Game>();
+    public virtual ICollection<GamePlatform> GamePlatforms { get; set; } = new List<GamePlatform>();
 }

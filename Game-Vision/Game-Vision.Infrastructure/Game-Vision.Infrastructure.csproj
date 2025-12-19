@@ -24,4 +24,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Game-Vision.Domain\Game-Vision.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

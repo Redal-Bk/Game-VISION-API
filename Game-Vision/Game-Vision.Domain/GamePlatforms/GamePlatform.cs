@@ -1,9 +1,4 @@
-﻿using Game_Vision.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Game_Vision.Domain.GamePlatforms
+﻿namespace Game_Vision.Domain
 {
     
     public class GamePlatform

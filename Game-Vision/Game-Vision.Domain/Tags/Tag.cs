@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Game_Vision.Models;
+﻿namespace Game_Vision.Domain;
 
 public partial class Tag
 {
@@ -16,4 +13,5 @@ public partial class Tag
     public DateTime CreatedAt { get; set; }
 
     public virtual ICollection<Game> Games { get; set; } = new List<Game>();
+    public virtual ICollection<GameTag> GameTags { get; set; } = new List<GameTag>();
 }

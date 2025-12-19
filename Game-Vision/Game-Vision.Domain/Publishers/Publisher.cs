@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Game_Vision.Models;
+﻿namespace Game_Vision.Domain;
 
 public partial class Publisher
 {

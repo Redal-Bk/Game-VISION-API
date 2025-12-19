@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Game_Vision.Domain;
+using Game_Vision.Domain.Logs;
 using Microsoft.EntityFrameworkCore;
 
 namespace Game_Vision.Models;
@@ -16,10 +16,13 @@ public partial class GameVisionDbContext : DbContext
     }
 
     public virtual DbSet<Comment> Comments { get; set; }
-
+    public virtual DbSet<Log> Logs { get; set; }
     public virtual DbSet<Developer> Developers { get; set; }
 
     public virtual DbSet<Favorite> Favorites { get; set; }
+    public virtual DbSet<GameGenre> GameGenres { get; set; }
+    public virtual DbSet<GamePlatform> GamePlatforms { get; set; }
+    public virtual DbSet<GameTag> GameTags { get; set; }
 
     public virtual DbSet<Game> Games { get; set; }
 
@@ -49,9 +52,7 @@ public partial class GameVisionDbContext : DbContext
 
     public virtual DbSet<UserPcspec> UserPcspecs { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.;Database=GameVisionDb;TrustServerCertificate=True;Trusted_Connection=True;");
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -522,6 +523,65 @@ public partial class GameVisionDbContext : DbContext
             entity.HasOne(d => d.User).WithOne(p => p.UserPcspec)
                 .HasForeignKey<UserPcspec>(d => d.UserId)
                 .HasConstraintName("FK_UserPCSpecs_UserId_Users");
+        });
+        // ====================== GameGenre ======================
+        modelBuilder.Entity<GameGenre>(entity =>
+        {
+            entity.HasKey(gg => new { gg.GameId, gg.GenreId });
+
+            entity.HasIndex(gg => gg.GenreId);
+
+            entity.HasOne(gg => gg.Game)
+                  .WithMany(g => g.GameGenres)
+                  .HasForeignKey(gg => gg.GameId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(gg => gg.Genre)
+                  .WithMany(g => g.GameGenres)
+                  .HasForeignKey(gg => gg.GenreId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            entity.ToTable("GameGenres");
+        });
+
+        // ====================== GamePlatform ======================
+        modelBuilder.Entity<GamePlatform>(entity =>
+        {
+            entity.HasKey(gp => new { gp.GameId, gp.PlatformId });
+
+            entity.HasIndex(gp => gp.PlatformId);
+
+            entity.HasOne(gp => gp.Game)
+                  .WithMany(g => g.GamePlatforms)
+                  .HasForeignKey(gp => gp.GameId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(gp => gp.Platform)
+                  .WithMany(p => p.GamePlatforms)
+                  .HasForeignKey(gp => gp.PlatformId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            entity.ToTable("GamePlatforms");
+        });
+
+        // ====================== GameTag ======================
+        modelBuilder.Entity<GameTag>(entity =>
+        {
+            entity.HasKey(gt => new { gt.GameId, gt.TagId });
+
+            entity.HasIndex(gt => gt.TagId);
+
+            entity.HasOne(gt => gt.Game)
+                  .WithMany(g => g.GameTags)
+                  .HasForeignKey(gt => gt.GameId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(gt => gt.Tag)
+                  .WithMany(t => t.GameTags)
+                  .HasForeignKey(gt => gt.TagId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            entity.ToTable("GameTags");
         });
 
         OnModelCreatingPartial(modelBuilder);

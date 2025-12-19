@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Game_Vision.Models;
+﻿namespace Game_Vision.Domain;
 
 public partial class Game
 {
@@ -54,4 +51,8 @@ public partial class Game
     public virtual ICollection<Platform> Platforms { get; set; } = new List<Platform>();
 
     public virtual ICollection<Tag> Tags { get; set; } = new List<Tag>();
+    public virtual ICollection<GameGenre> GameGenres { get; set; } = new List<GameGenre>();
+    public virtual ICollection<GamePlatform> GamePlatforms { get; set; } = new List<GamePlatform>();
+    public virtual ICollection<GameTag> GameTags { get; set; } = new List<GameTag>();
+
 }
