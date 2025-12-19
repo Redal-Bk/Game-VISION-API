@@ -8,5 +8,6 @@ namespace GameVISION.Infrastracture.AuthRepo
     {
         Task<bool> RegisterAsync(RegisterDTO dTO);
         Task<User?> Login(LoginDTO dTO);
+        public record AuthResult(string Token, DateTime ExpiresAt);
     }
 }

@@ -1,14 +1,17 @@
-﻿namespace GameVISION.Core.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GameVISION.Core.Entities
 {
     public class Follow
     {
+        [Key]
         public int FollowId { get; set; }
-        public int FollowerId { get; set; }
-        public int FollowingId { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public int? FollowerId { get; set; }
+        public int? FollowingId { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
 
         // روابط
-        public User Follower { get; set; } = null!;
-        public User Following { get; set; } = null!;
+        public User? Follower { get; set; } = null!;
+        public User? Following { get; set; } = null!;
     }
 }

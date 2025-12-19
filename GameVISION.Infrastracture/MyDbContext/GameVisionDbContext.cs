@@ -36,7 +36,11 @@ namespace GameVISION.Infrastracture.MyDbContext
             // تنظیم کلید مرکب برای GameTagRelation
             modelBuilder.Entity<GameTagRelation>()
                 .HasKey(gt => new { gt.GameId, gt.TagId });
-
+            modelBuilder.Entity<Game>()
+                .HasMany(g => g.Ratings)
+                .WithOne(r => r.Game)
+                .HasForeignKey(r => r.GameId)
+                .OnDelete(DeleteBehavior.Cascade);
             // رابطه بازی ↔ تگ
             modelBuilder.Entity<GameTagRelation>()
                 .HasOne(gt => gt.Game)
@@ -75,8 +79,10 @@ namespace GameVISION.Infrastracture.MyDbContext
 
             // جلوگیری از تکرار Rating یک کاربر برای یک بازی
             modelBuilder.Entity<GameRating>()
-                .HasIndex(r => new { r.UserId, r.GameId })
-                .IsUnique();
+                .HasOne(r => r.User)
+                .WithMany(u => u.Ratings)
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
