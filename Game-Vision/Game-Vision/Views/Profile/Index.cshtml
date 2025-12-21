@@ -1,4 +1,8 @@
-﻿@using System.Text
+﻿@model UserPCSpecsDto
+@using System.Text
+@using Game_Vision.Application.DTO.UserPcReq
+@using Game_Vision.Domain.Basic
+
 @{
     Layout = "_Layout";
 }
@@ -77,31 +81,50 @@
                 </div>
                 <div class="system-specs mt-4">
                     <h5 class="mb-3">مشخصات سیستم من</h5>
-                    <div class="spec-item">
-                        <div class="d-flex justify-content-between">
-                            <span class="text-secondary">پردازنده:</span>
-                            <span>Intel Core i7-12700K</span>
+                    @if (Model != null)
+                    {
+                        <div class="spec-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-secondary">پردازنده:</span>
+                                <span>@(string.IsNullOrEmpty(Model.CPU) ? "نامشخص" : Model.CPU)</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="d-flex justify-content-between">
-                            <span class="text-secondary">کارت گرافیک:</span>
-                            <span>RTX 3080</span>
+                        <div class="spec-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-secondary">کارت گرافیک:</span>
+                                <span>@(string.IsNullOrEmpty(Model.GPU) ? "نامشخص" : Model.GPU)</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="d-flex justify-content-between">
-                            <span class="text-secondary">رم:</span>
-                            <span>32 GB DDR4</span>
+                        <div class="spec-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-secondary">رم:</span>
+                                <span>@(Model.RAM > 0 ? $"{Model.RAM} GB" : "نامشخص")</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="d-flex justify-content-between">
-                            <span class="text-secondary">حافظه:</span>
-                            <span>1TB SSD</span>
+                        <div class="spec-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-secondary">حافظه:</span>
+                                <span>@(Model.Storage > 0 ? $"{Model.Storage} GB" : "نامشخص")</span>
+                            </div>
                         </div>
-                    </div>
-                    <button class="btn btn-outline-neon btn-sm w-100 mt-3">
+                        <div class="spec-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-secondary">سیستم عامل:</span>
+                                <span>@(string.IsNullOrEmpty(Model.OS) ? "نامشخص" : Model.OS)</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-secondary">DirectX:</span>
+                                <span>@(string.IsNullOrEmpty(Model.DirectX) ? "نامشخص" : Model.DirectX)</span>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-secondary text-center">مشخصات سیستم ثبت نشده است.</p>
+                    }
+                    <button type="button" class="btn btn-outline-neon btn-sm w-100 mt-3" data-bs-toggle="modal" data-bs-target="#editPCSpecsModal">
                         <i class="bi bi-pencil"></i> ویرایش مشخصات
                     </button>
                 </div>
@@ -147,7 +170,7 @@
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <img src="https://images.pexels.com/photos/7915437/pexels-photo-7915437.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <img src="~/Images/LastOfUs.png" alt="Game">
                                     <div class="card-game-body">
                                         <h5 class="card-game-title">The Last of Us Part III</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -168,7 +191,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <img src="~/Images/CyberPunk.jpg" alt="Game">
                                     <div class="card-game-body">
                                         <h5 class="card-game-title">Cyberpunk 2077</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -189,7 +212,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <img src="https://images.pexels.com/photos/9071739/pexels-photo-9071739.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <img src="~/Images/HogwartsLegasy.png" alt="Game">
                                     <div class="card-game-body">
                                         <h5 class="card-game-title">Hogwarts Legacy</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -210,7 +233,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <img src="https://images.pexels.com/photos/7915434/pexels-photo-7915434.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <img src="~/Images/Ragnarok.jpg" alt="Game">
                                     <div class="card-game-body">
                                         <h5 class="card-game-title">God of War Ragnarök</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -452,6 +475,133 @@
             </div>
         </div>
     </div>
+
+    <!-- مودال ویرایش مشخصات سیستم با ComboBox -->
+    <div class="modal fade" id="editPCSpecsModal" tabindex="-1" aria-labelledby="editPCSpecsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: var(--bg-card); border: 1px solid var(--border-color);">
+                <div class="modal-header" style="border-bottom: 1px solid var(--border-color);">
+                    <h5 class="modal-title" id="editPCSpecsModalLabel" style="color: var(--primary-neon);">
+                        <i class="bi bi-gear me-2"></i>ویرایش مشخصات سیستم
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editPCSpecsForm">
+                        <div class="mb-3">
+                            <label class="form-label">سیستم عامل</label>
+                            <select class="form-control-custom" id="os">
+                                @foreach (var os in ViewData["Oses"] as List<OsList>)
+                                {
+                                    <option value="@os.Name">@os.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">پردازنده (CPU)</label>
+                            <select class="form-control-custom" id="cpu">
+                                @foreach (var cpu in ViewData["Cpus"] as List<CpuList>)
+                                {
+                                    <option value="@cpu.Name">@cpu.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">رم (به گیگابایت)</label>
+                            <select class="form-control-custom" id="ram">
+                                @foreach (var ram in ViewData["Rams"] as List<RamList>)
+                                {
+                                    var ramValue = ram.Name.Replace(" GB", "").Trim();
+                                    <option value="@ramValue">@ram.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">کارت گرافیک (GPU)</label>
+                            <select class="form-control-custom" id="gpu">
+                                @foreach (var gpu in ViewData["Gpus"] as List<GpuList>)
+                                {
+                                    <option value="@gpu.Name">@gpu.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">DirectX</label>
+                            <input type="text" class="form-control-custom" id="directx" value="@(Model?.DirectX ?? "")">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">حافظه (به گیگابایت)</label>
+                            <select class="form-control-custom" id="storage">
+                                @foreach (var storage in ViewData["Storages"] as List<StorageList>)
+                                {
+                                    var storageValue = storage.Name.Replace(" GB", "").Replace(" TB", "000").Trim();
+                                    <option value="@storageValue">@storage.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid var(--border-color);">
+                    <button type="button" class="btn btn-outline-neon" data-bs-dismiss="modal">لغو</button>
+                    <button type="button" class="btn btn-neon" id="savePCSpecs">
+                        <i class="bi bi-save me-2"></i>ذخیره تغییرات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // وقتی مودال باز می‌شه، گزینه‌های فعلی رو selected کن
+        const modal = document.getElementById('editPCSpecsModal');
+        modal.addEventListener('show.bs.modal', function () {
+            const currentOS = "@(Model?.OS ?? "")";
+            const currentCPU = "@(Model?.CPU ?? "")";
+            const currentRAM = "@(Model?.RAM ?? 8)";
+            const currentGPU = "@(Model?.GPU ?? "")";
+            const currentStorage = "@(Model?.Storage ?? 256)";
+
+            document.getElementById('os').value = currentOS;
+            document.getElementById('cpu').value = currentCPU;
+            document.getElementById('ram').value = currentRAM;
+            document.getElementById('gpu').value = currentGPU;
+            document.getElementById('storage').value = currentStorage;
+        });
+
+        // ذخیره با AJAX
+        document.getElementById('savePCSpecs')?.addEventListener('click', async () => {
+            const formData = {
+                OS: document.getElementById('os').value.trim(),
+                CPU: document.getElementById('cpu').value.trim(),
+                RAM: parseInt(document.getElementById('ram').value) || 8,
+                GPU: document.getElementById('gpu').value.trim(),
+                DirectX: document.getElementById('directx').value.trim(),
+                Storage: parseInt(document.getElementById('storage').value) || 256
+            };
+
+            try {
+                const response = await fetch('/Profile/pcspecs', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    bootstrap.Modal.getInstance(modal).hide();
+                    alert('مشخصات سیستم با موفقیت ذخیره شد!');
+                    location.reload();
+                } else {
+                    alert('خطا در ذخیره مشخصات');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('خطا در ارتباط با سرور');
+            }
+        });
+    </script>
 </body>
 </html>

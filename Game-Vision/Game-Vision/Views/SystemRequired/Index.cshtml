@@ -1,0 +1,43 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <div class="system-specs">
+        <h5 class="mb-3">آیا سیستم من این بازی رو اجرا می‌کنه؟</h5>
+        <div id="compatibility-result">
+            <p class="text-secondary">در حال بررسی...</p>
+        </div>
+        <button id="check-compatibility" class="btn btn-neon mt-3">
+            چک کن
+        </button>
+    </div>
+
+    <script>
+        document.getElementById('check-compatibility').addEventListener('click', async () => {
+            const response = await fetch(`/api/games/@Model.Game.Id/compatibility`);
+            const data = await response.json();
+
+            let colorClass = '';
+            let icon = '';
+            switch (data.level) {
+                case 'Perfect': colorClass = 'text-success'; icon = '✅'; break;
+                case 'Good': colorClass = 'text-success'; icon = '👍'; break;
+                case 'Minimum': colorClass = 'text-warning'; icon = '⚠️'; break;
+                case 'Low': colorClass = 'text-warning'; icon = '😟'; break;
+                case 'CannotRun': colorClass = 'text-danger'; icon = '❌'; break;
+            }
+
+            document.getElementById('compatibility-result').innerHTML = `
+                <div class="alert alert-${data.level === 'CannotRun' ? 'danger' : data.level === 'Low' || data.level === 'Minimum' ? 'warning' : 'success'}">
+                    <h6>${icon} ${data.message}</h6>
+                    <p>امتیاز سازگاری: <strong>${data.overallScore}%</strong></p>
+                    ${data.bottleneck ? `<p class="mb-0"><strong>بوتل‌نک:</strong> ${data.bottleneck}</p>` : ''}
+                </div>
+            `;
+        });
+    </script>
+}
+else
+{
+    <div class="system-specs">
+        <p>برای چک سازگاری، لطفاً <a href="/Account">وارد شوید</a></p>
+    </div>
+}

@@ -38,6 +38,7 @@ namespace Game_Vision.AppExtention
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RegisterCommand).Assembly));
             services.AddValidatorsFromAssembly(typeof(RegisterCommandValidator).Assembly);
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddHttpClient<IWebSearchService, WebSearchService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 

@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Query\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Game-Vision.Infrastructure\Game-Vision.Infrastructure.csproj" />
   </ItemGroup>
 

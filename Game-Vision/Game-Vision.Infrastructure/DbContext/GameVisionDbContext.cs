@@ -1,4 +1,5 @@
 ﻿using Game_Vision.Domain;
+using Game_Vision.Domain.Basic;
 using Game_Vision.Domain.Logs;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,7 +52,11 @@ public partial class GameVisionDbContext : DbContext
     public virtual DbSet<UserFollow> UserFollows { get; set; }
 
     public virtual DbSet<UserPcspec> UserPcspecs { get; set; }
-
+    public virtual DbSet<CpuList> CpuList { get; set; }
+    public virtual DbSet<GpuList> GpuList { get; set; }
+    public virtual DbSet<OsList> OsList { get; set; }
+    public virtual DbSet<RamList> RamList { get; set; }
+    public DbSet<StorageList> StorageList { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
