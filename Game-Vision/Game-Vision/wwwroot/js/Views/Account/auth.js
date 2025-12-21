@@ -1,4 +1,40 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
+    // تابع برای آپدیت هدر
+    function updateHeaderAfterLogin() {
+        const token = localStorage.getItem('jwtToken');
+        if (!token) return;
+
+        const username = localStorage.getItem('username') || "کاربر";
+        const role = localStorage.getItem('role') || "User";
+        let avatarUrl = "https://cdn.discordapp.com/embed/avatars/0.png";
+
+        const headerAuthSection = document.getElementById('user-auth-section');
+        if (headerAuthSection) {
+            headerAuthSection.innerHTML = `
+                <div class="d-flex align-items-center gap-3">
+                    <img src="${avatarUrl}" class="rounded-circle border border-2" 
+                         style="width: 50px; height: 50px; object-fit: cover; border-color: var(--primary-neon)!important; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);"
+                         alt="آواتار">
+                    <div class="d-flex flex-column">
+                        <span class="fw-bold text-white" style="text-shadow: 0 0 10px var(--primary-neon);">${username}</span>
+                        <small class="text-secondary">${role}</small>
+                    </div>
+                    <button onclick="logout()" class="btn btn-sm btn-outline-neon">
+                        <i class="bi bi-box-arrow-right"></i> خروج
+                    </button>
+                </div>
+            `;
+        }
+    }
+
+    // تابع خروج
+    function logout() {
+        localStorage.removeItem('jwtToken');
+        localStorage.removeItem('username');
+        localStorage.removeItem('role');
+        window.location.href = '/';
+    }
+
     // فرم ورود
     const loginForm = document.getElementById('login');
     if (loginForm) {
@@ -15,18 +51,18 @@
             }
 
             const submitBtn = loginForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>در حال ورود...';
 
-            // گرفتن Anti-Forgery Token از فرم (بهترین روش برای MVC)
             const antiforgeryToken = loginForm.querySelector('input[name="__RequestVerificationToken"]').value;
 
             try {
-                const response = await fetch('/Account/Login', {  // مسیر درست برای MVC
+                const response = await fetch('/Account/Login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'RequestVerificationToken': antiforgeryToken  // این مهمه!
+                        'RequestVerificationToken': antiforgeryToken
                     },
                     body: JSON.stringify({
                         usernameOrEmail: usernameOrEmail,
@@ -36,59 +72,68 @@
 
                 if (response.ok) {
                     const data = await response.json();
+
+                    // ذخیره توکن و اطلاعات
                     localStorage.setItem('jwtToken', data.token);
                     localStorage.setItem('username', data.username);
                     localStorage.setItem('role', data.role);
 
-                    showSuccess('login', 'ورود با موفقیت انجام شد! در حال انتقال...');
+                    showSuccess('login', 'ورود با موفقیت انجام شد!');
+
+                    // آپدیت هدر فوری
+                    updateHeaderAfterLogin();
+
                     setTimeout(() => {
                         window.location.href = '/';
-                    }, 1500);
+                    }, 1000);
                 } else {
                     const errorData = await response.json().catch(() => ({}));
                     showError('login', errorData.message || 'نام کاربری یا رمز عبور اشتباه است');
                 }
             } catch (err) {
                 console.error(err);
-                showError('login', 'خطا در ارتباط با سرور. لطفاً دوباره تلاش کنید');
+                showError('login', 'خطا در ارتباط با سرور');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="bi bi-box-arrow-in-left"></i> ورود';
+                submitBtn.innerHTML = originalText;
             }
         });
     }
 
-    // فرم ثبت‌نام
+    // فرم ثبت‌نام (دقیقاً مثل بالا)
     const registerForm = document.getElementById('register');
     if (registerForm) {
         registerForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             clearErrors('register');
 
-            const inputs = registerForm.querySelectorAll('input');
-            const username = inputs[1].value.trim(); // نام کاربری
-            const email = inputs[2].value.trim();
-            const password = inputs[3].value;
-            const confirmPassword = inputs[4].value;
+            const username = registerForm.querySelector('input[placeholder="ali_gamer"]').value.trim();
+            const email = registerForm.querySelector('input[type="email"]').value.trim();
+            const password = registerForm.querySelectorAll('input[type="password"]')[0].value;
+            const confirmPassword = registerForm.querySelectorAll('input[type="password"]')[1].value;
 
             if (!username || !email || !password || !confirmPassword) {
                 showError('register', 'همه فیلدها الزامی هستند');
                 return;
             }
-            
+            if (password !== confirmPassword) {
+                showError('register', 'رمز عبور و تکرار آن مطابقت ندارند');
+                return;
+            }
             if (password.length < 6) {
                 showError('register', 'رمز عبور باید حداقل ۶ کاراکتر باشد');
                 return;
             }
 
             const submitBtn = registerForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>در حال ثبت‌نام...';
 
             const antiforgeryToken = registerForm.querySelector('input[name="__RequestVerificationToken"]').value;
 
             try {
-                const response = await fetch('/Account/Register', {  // مسیر درست برای MVC
+                const response = await fetch('/Account/Register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -104,14 +149,19 @@
 
                 if (response.ok) {
                     const data = await response.json();
+
                     localStorage.setItem('jwtToken', data.token);
                     localStorage.setItem('username', data.username);
                     localStorage.setItem('role', data.role);
 
-                    showSuccess('register', 'ثبت‌نام با موفقیت انجام شد! خوش آمدید');
+                    showSuccess('register', 'ثبت‌نام با موفقیت انجام شد!');
+
+                    // آپدیت هدر فوری
+                    updateHeaderAfterLogin();
+
                     setTimeout(() => {
                         window.location.href = '/';
-                    }, 1500);
+                    }, 1000);
                 } else {
                     const errorData = await response.json().catch(() => ({}));
                     showError('register', errorData.message || 'خطایی رخ داد');
@@ -121,12 +171,12 @@
                 showError('register', 'خطا در ارتباط با سرور');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="bi bi-person-plus"></i> ثبت‌نام';
+                submitBtn.innerHTML = originalText;
             }
         });
     }
 
-    // توابع کمکی (همون قبلی، تغییر نکردن)
+    // توابع کمکی (همون قبلی)
     function showError(formId, message) {
         const form = document.getElementById(formId);
         let errorDiv = form.querySelector('.alert-danger');
@@ -153,4 +203,7 @@
         const form = document.getElementById(formId);
         form.querySelectorAll('.alert').forEach(el => el.remove());
     }
+
+    // چک اولیه وقتی صفحه لود می‌شه
+    updateHeaderAfterLogin();
 });

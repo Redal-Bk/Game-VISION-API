@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using System.Text
 <link href="~/321654987846985749674967.ico" rel="icon" type="image/x-icon" />
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
@@ -26,37 +27,73 @@
             <div class="d-flex align-items-center gap-3">
                 <input type="search" class="search-box" placeholder="جستجوی بازی...">
 
-                @* اگر کاربر لاگین کرده باشه *@
+                @* وضعیت کاربر در هدر *@
                 @if (User.Identity?.IsAuthenticated == true)
                 {
                     <div class="d-flex align-items-center gap-3">
-                        @if (User.FindFirst("urn:discord:avatar")?.Value is string avatarHash &&
-                                            User.FindFirst(ClaimTypes.NameIdentifier)?.Value is string discordId)
-                        {
-                            <img src="https://cdn.discordapp.com/avatars/@(User.FindFirst(ClaimTypes.NameIdentifier)?.Value)/@(User.FindFirst("urn:discord:avatar")?.Value).png?size=64"
-                                 style="border-radius:50%; width:64px; vertical-align:middle;"
-                                 alt="Avatar" />
+                        @{
+                            string avatarUrl = null; // اول null می‌ذاریم
+                            string userName = User.FindFirst(ClaimTypes.Name)?.Value ?? "کاربر";
+
+                            // ۱. اگر با دیسکورد لاگین کرده باشه
+                            if (User.FindFirst("urn:discord:id")?.Value is string discordId &&
+                            User.FindFirst("urn:discord:avatar")?.Value is string avatarHash)
+                            {
+                                avatarUrl = $"https://cdn.discordapp.com/avatars/{discordId}/{avatarHash}.png?size=64";
+                                userName = User.FindFirst("urn:discord:username")?.Value ?? userName;
+                            }
+                            // ۲. اگر کاربر معمولی آواتار آپلود کرده باشه
+                            else if (User.FindFirst("AvatarUrl")?.Value is string customAvatar && !string.IsNullOrEmpty(customAvatar))
+                            {
+                                avatarUrl = customAvatar;
+                            }
+
+                            // ۳. اگر هیچ آواتاری نداشت → آدمک نئونی گیمینگ (SVG)
+                            if (string.IsNullOrEmpty(avatarUrl))
+                            {
+                                avatarUrl = "data:image/svg+xml;base64," + Convert.ToBase64String(Encoding.UTF8.GetBytes(@"
+                                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='64' height='64'>
+                                        <defs>
+                                        <linearGradient id='neonGrad' x1='0%' y1='0%' x2='100%' y2='100%'>
+                                        <stop offset='0%' style='stop-color:#00f0ff' />
+                                        <stop offset='100%' style='stop-color:#b200ff' />
+                                        </linearGradient>
+                                        </defs>
+                                        <circle cx='50' cy='50' r='48' fill='none' stroke='url(#neonGrad)' stroke-width='4' opacity='0.8'/>
+                                        <circle cx='50' cy='35' r='15' fill='none' stroke='url(#neonGrad)' stroke-width='3'/>
+                                        <path d='M30 60 Q50 80 70 60' stroke='url(#neonGrad)' stroke-width='3' fill='none'/>
+                                        <circle cx='35' cy='30' r='4' fill='url(#neonGrad)'/>
+                                        <circle cx='65' cy='30' r='4' fill='url(#neonGrad)'/>
+                                        </svg>
+                                        "));
+                            }
                         }
-                        else
-                        {
-                            @* اگر آواتار نداشت (مثلاً کاربر معمولی بدون دیسکورد) *@
-                            <img src="https://cdn.discordapp.com/embed/avatars/0.png" class="rounded-circle" width="40" height="40" alt="Avatar" />
-                        }
+
+                        <img src="@avatarUrl"
+                             class="rounded-circle border border-2"
+                             style="width: 50px; height: 50px; object-fit: cover; border-color: var(--primary-neon)!important; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);"
+                             alt="آواتار کاربر" />
 
                         <div class="d-flex flex-column">
-                            <span class="fw-bold">@User.FindFirst(ClaimTypes.Name)?.Value</span>
-                            @* اگر بخوای ایمیل یا چیز دیگه هم نشون بدی *@
-                            @* <small class="text-muted">@User.FindFirst(ClaimTypes.Email)?.Value</small> *@
+                            <span class="fw-bold text-white" style="text-shadow: 0 0 10px var(--primary-neon);">
+                                @userName
+                            </span>
+                            <small class="text-secondary">
+                                @User.FindFirst(ClaimTypes.Role)?.Value
+                            </small>
                         </div>
 
-                        @* لینک خروج (اختیاری) *@
-                        <a href="/Account/Logout" class="btn btn-sm btn-outline-danger">خروج</a>
+                        <a href="/Account/Logout" class="btn btn-sm btn-outline-neon">
+                            <i class="bi bi-box-arrow-right"></i> خروج
+                        </a>
                     </div>
                 }
                 else
                 {
-                    @* اگر لاگین نکرده باشه *@
-                    <a href="/Account" class="btn btn-neon">ورود / ثبت‌نام</a>
+                    <a href="/Account" class="btn btn-neon px-4">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>
+                        ورود / ثبت‌نام
+                    </a>
                 }
             </div>
         </div>

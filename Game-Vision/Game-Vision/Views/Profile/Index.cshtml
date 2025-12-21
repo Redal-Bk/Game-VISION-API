@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Text
+@{
     Layout = "_Layout";
 }
 <!DOCTYPE html>
@@ -12,7 +13,6 @@
     <link rel="stylesheet" href="~/css/Style/styles.css">
 </head>
 <body>
-
     <div class="container mt-5">
         <div class="row">
             <div class="col-lg-4">
@@ -23,7 +23,6 @@
                         var username = User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value ?? "کاربر دیسکورد";
                         var globalName = User.FindFirst("urn:discord:global_name")?.Value;
                         var displayName = !string.IsNullOrEmpty(globalName) ? globalName : username;
-
                         string avatarUrl;
                         if (!string.IsNullOrEmpty(discordId) && !string.IsNullOrEmpty(avatarHash))
                         {
@@ -31,16 +30,27 @@
                         }
                         else
                         {
-                            avatarUrl = "https://cdn.discordapp.com/embed/avatars/0.png";
+                            avatarUrl = "data:image/svg+xml;base64," + Convert.ToBase64String(Encoding.UTF8.GetBytes(@"
+                                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='64' height='64'>
+                                        <defs>
+                                        <linearGradient id='neonGrad' x1='0%' y1='0%' x2='100%' y2='100%'>
+                                        <stop offset='0%' style='stop-color:#00f0ff' />
+                                        <stop offset='100%' style='stop-color:#b200ff' />
+                                        </linearGradient>
+                                        </defs>
+                                        <circle cx='50' cy='50' r='48' fill='none' stroke='url(#neonGrad)' stroke-width='4' opacity='0.8'/>
+                                        <circle cx='50' cy='35' r='15' fill='none' stroke='url(#neonGrad)' stroke-width='3'/>
+                                        <path d='M30 60 Q50 80 70 60' stroke='url(#neonGrad)' stroke-width='3' fill='none'/>
+                                        <circle cx='35' cy='30' r='4' fill='url(#neonGrad)'/>
+                                        <circle cx='65' cy='30' r='4' fill='url(#neonGrad)'/>
+                                        </svg>
+                                        "));
                         }
                     }
-
                     <img src="@avatarUrl" alt="Avatar" class="profile-avatar mb-3"
                          onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
-
                     <h3 class="mb-2">@displayName</h3>
                     <p class="text-secondary mb-3">@username</p>
-
                     <div class="d-flex justify-content-center gap-3 mb-4">
                         <div class="text-center">
                             <h5 class="mb-0">127</h5>
@@ -137,8 +147,28 @@
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <!-- کاور رسمی Cyberpunk 2077 -->
-                                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/eef327f5-d629-4be7-81dd-a38d262d16c6.jpg" alt="Cyberpunk 2077">
+                                    <img src="https://images.pexels.com/photos/7915437/pexels-photo-7915437.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
+                                    <div class="card-game-body">
+                                        <h5 class="card-game-title">The Last of Us Part III</h5>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="rating-stars">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                                <span class="small">4.0</span>
+                                            </div>
+                                            <span class="badge-neon">PS5</span>
+                                        </div>
+                                        <p class="text-secondary small mb-3">یک بازی اکشن-ماجراجویی پس از آخرالزمانی...</p>
+                                        <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-game">
+                                    <img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
                                     <div class="card-game-body">
                                         <h5 class="card-game-title">Cyberpunk 2077</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -150,24 +180,18 @@
                                                 <i class="bi bi-star-half"></i>
                                                 <span class="small">4.5</span>
                                             </div>
-                                            <button class="btn btn-sm" style="color: var(--accent-red);">
-                                                <i class="bi bi-heart-fill"></i>
-                                            </button>
+                                            <span class="badge-neon">PC</span>
                                         </div>
-                                        <div class="d-flex gap-1 mb-3">
-                                            <span class="badge-genre small">اکشن</span>
-                                            <span class="badge-genre small">RPG</span>
-                                        </div>
+                                        <p class="text-secondary small mb-3">در دنیای آینده نقش یک مزدور را بازی کنید...</p>
                                         <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <!-- کاور رسمی God of War Ragnarök -->
-                                    <img src="https://preview.redd.it/v72pm7rmbnm71.jpg?auto=webp&s=030d8d1dfe4a568d24ba6c6d2cab78654206b0ae" alt="God of War Ragnarök">
+                                    <img src="https://images.pexels.com/photos/9071739/pexels-photo-9071739.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
                                     <div class="card-game-body">
-                                        <h5 class="card-game-title">God of War Ragnarök</h5>
+                                        <h5 class="card-game-title">Hogwarts Legacy</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
                                             <div class="rating-stars">
                                                 <i class="bi bi-star-fill"></i>
@@ -177,51 +201,18 @@
                                                 <i class="bi bi-star-fill"></i>
                                                 <span class="small">5.0</span>
                                             </div>
-                                            <button class="btn btn-sm" style="color: var(--accent-red);">
-                                                <i class="bi bi-heart-fill"></i>
-                                            </button>
+                                            <span class="badge-neon">Multi</span>
                                         </div>
-                                        <div class="d-flex gap-1 mb-3">
-                                            <span class="badge-genre small">اکشن</span>
-                                            <span class="badge-genre small">ماجراجویی</span>
-                                        </div>
+                                        <p class="text-secondary small mb-3">وارد دنیای جادوگری هری پاتر شوید...</p>
                                         <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="card-game">
-                                    <!-- کاور رسمی Hogwarts Legacy -->
-                                    <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/store/software/switch/70010000014724/72ce0a17215521a167c3da579db4cc48a2f7a52eacc81ad985ba20fd6817fdc2" alt="Hogwarts Legacy">
+                                    <img src="https://images.pexels.com/photos/7915434/pexels-photo-7915434.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Game">
                                     <div class="card-game-body">
-                                        <h5 class="card-game-title">Hogwarts Legacy</h5>
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <div class="rating-stars">
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star"></i>
-                                                <span class="small">4.0</span>
-                                            </div>
-                                            <button class="btn btn-sm" style="color: var(--accent-red);">
-                                                <i class="bi bi-heart-fill"></i>
-                                            </button>
-                                        </div>
-                                        <div class="d-flex gap-1 mb-3">
-                                            <span class="badge-genre small">RPG</span>
-                                            <span class="badge-genre small">Open World</span>
-                                        </div>
-                                        <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card-game">
-                                    <!-- کاور رسمی The Last of Us Part II -->
-                                    <img src="https://s3.us-east-1.amazonaws.com/nd.images/uploads/Key-Art-Images-Dark-for-Feb-11-Blog_200304_205559.jpg" alt="The Last of Us Part II">
-                                    <div class="card-game-body">
-                                        <h5 class="card-game-title">The Last of Us Part II</h5>
+                                        <h5 class="card-game-title">God of War Ragnarök</h5>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
                                             <div class="rating-stars">
                                                 <i class="bi bi-star-fill"></i>
@@ -231,14 +222,9 @@
                                                 <i class="bi bi-star-half"></i>
                                                 <span class="small">4.7</span>
                                             </div>
-                                            <button class="btn btn-sm" style="color: var(--accent-red);">
-                                                <i class="bi bi-heart-fill"></i>
-                                            </button>
+                                            <span class="badge-neon">PS5</span>
                                         </div>
-                                        <div class="d-flex gap-1 mb-3">
-                                            <span class="badge-genre small">اکشن</span>
-                                            <span class="badge-genre small">ماجراجویی</span>
-                                        </div>
+                                        <p class="text-secondary small mb-3">کریتوس و آترئوس در ماجراجویی جدید...</p>
                                         <a href="game-detail.html" class="btn btn-outline-neon btn-sm w-100">مشاهده جزئیات</a>
                                     </div>
                                 </div>
@@ -333,7 +319,7 @@
                         <h4 class="mb-4">آخرین فعالیت‌ها</h4>
                         <div class="review-card">
                             <div class="d-flex gap-3">
-                                <div style="color: var(--primary-neon);">
+                                <div style="color: var(--accent-red);">
                                     <i class="bi bi-heart-fill fs-4"></i>
                                 </div>
                                 <div class="flex-grow-1">
@@ -372,7 +358,7 @@
                         </div>
                         <div class="review-card">
                             <div class="d-flex gap-3">
-                                <div style="color: var(--primary-neon);">
+                                <div style="color: var(--accent-red);">
                                     <i class="bi bi-heart-fill fs-4"></i>
                                 </div>
                                 <div class="flex-grow-1">
@@ -396,12 +382,76 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="review-card">
+                            <div class="d-flex gap-3">
+                                <div style="color: var(--primary-neon);">
+                                    <i class="bi bi-gear-fill fs-4"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1">
+                                        مشخصات سیستم خود را به‌روزرسانی کردید
+                                    </p>
+                                    <small class="text-secondary">3 هفته پیش</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="d-flex gap-3">
+                                <div style="color: var(--accent-red);">
+                                    <i class="bi bi-heart-fill fs-4"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1">
+                                        <strong>The Last of Us Part II</strong> را به علاقه‌مندی‌ها اضافه کردید
+                                    </p>
+                                    <small class="text-secondary">1 ماه پیش</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="d-flex gap-3">
+                                <div style="color: var(--secondary-neon);">
+                                    <i class="bi bi-chat-fill fs-4"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1">
+                                        نظری در خبر <strong>تاریخ انتشار GTA 6</strong> گذاشتید
+                                    </p>
+                                    <small class="text-secondary">1 ماه پیش</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="d-flex gap-3">
+                                <div style="color: var(--accent-green);">
+                                    <i class="bi bi-star-fill fs-4"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1">
+                                        بررسی جدیدی برای <strong>The Last of Us Part II</strong> نوشتید
+                                    </p>
+                                    <small class="text-secondary">1 ماه پیش</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="d-flex gap-3">
+                                <div style="color: var(--primary-neon);">
+                                    <i class="bi bi-person-plus-fill fs-4"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1">
+                                        به GameVision پیوستید
+                                    </p>
+                                    <small class="text-secondary">2 ماه پیش</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

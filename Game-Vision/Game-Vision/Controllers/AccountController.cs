@@ -46,7 +46,6 @@ namespace Game_Vision.Controllers
             try
             {
                 var result = await _mediator.Send(command);
-     
                 return Ok(result);
             }
             catch (Exception ex)
@@ -80,9 +79,9 @@ namespace Game_Vision.Controllers
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
-            // کوکی Authentication رو پاک می‌کنه و کاربر رو Sign Out می‌کنه
+           
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
+            HttpContext.Response.Cookies.Delete("authToken");
            
             return Redirect("/");
         }
